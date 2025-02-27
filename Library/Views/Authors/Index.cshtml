@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AuthorModel> // IEnumerable позволяет использовать циклы для перебора
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Библиотека</h2>
+<button onclick="location.href='@Url.Action("AddAuthor", "Authors")'">Добавить автора</button>
+<button onclick="location.href='@Url.Action("AddBook", "Books")'">Добавить книгу</button>
+<table class="table">
+    <thead> 
+        <tr>
+            <th>Автор</th>
+            <th>Название</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        @foreach(var author in Model)
+        {
+            <tr>
+                <td>@author.Name</td>
+                <td>
+                    <ul>
+                        @foreach (var book in author.Books)
+                        {
+                            <li>@book.Title</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+

@@ -1,0 +1,26 @@
+﻿@model BookModel
+@{
+    ViewData["Title"] = "AddAuthor";
+}
+
+<div class="container">
+    <form class="" asp-controller="Books" asp-action="AddBook" method="post">
+        <label class="form-label">Название книги</label>
+        <input class="form-control" type="text" asp-for="Title" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+
+        <label class="form-label">Введите инициалы и фамилию автора (Пример: А. С. Пушкин)</label>
+        <input class="form-control" type="text" asp-for="Author.Name" />
+        <span asp-validation-for="Author.Name" class="text-danger"></span>
+        <p></p>
+        <button type="submit">Добавить автора</button>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

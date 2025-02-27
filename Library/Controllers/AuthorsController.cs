@@ -16,7 +16,7 @@ namespace Library.Controllers
 
         public IActionResult Index()
         {
-            var authors = _context.Authors.Include(a => a.Books).ToList();// Сохранение авторов в список 
+            var authors = _context.Authors.Include(a => a.Books).ToList();
 
             return View(authors);
         }
@@ -32,20 +32,17 @@ namespace Library.Controllers
             try
             {
                 var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-                using (var context = new ApplicationContext(optionsBuilder.Options))
+                bool exists = _context.Authors.Any(a => a.Name == author.Name.Trim());
+                if (exists)
                 {
-                    bool exists = context.Authors.Any(a => a.Name == author.Name.Trim());
-                    if (exists)
-                    {
-                        Console.WriteLine("Такая модель уже есть в бд");
-                        return View();
-                    }
-                    else 
-                    {
-                        _context.Authors.Add(author);
-                        _context.SaveChanges();
-                        return RedirectToAction("Index", "Authors");
-                    }
+                    Console.WriteLine("Такая модель уже есть в бд");
+                    return View();
+                }
+                else
+                {
+                    _context.Authors.Add(author);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index", "Authors");
                 }
             }
             catch

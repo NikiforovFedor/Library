@@ -13,7 +13,6 @@ namespace Library.Models
 
         public int AuthorId { get; set; }
 
-        [Required(ErrorMessage = "Обязательное поле")]
-        public AuthorModel Author { get; set; }
+        public virtual AuthorModel Author { get; set; }
     }
 }

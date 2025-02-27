@@ -16,16 +16,15 @@ namespace Library.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); 
 
-            //modelBuilder.ApplyConfiguration(new AuthorConfiguration());
-            //modelBuilder.ApplyConfiguration(new BookConfiguration());
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly()); // Подтягивает все классы, наследуемые 
-            // от IEntityTypeConfiguration
             base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=UserTasks;Username=postgres;Password=4312");
+
+            optionsBuilder.UseLazyLoadingProxies();
         }
     }
 }

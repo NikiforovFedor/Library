@@ -9,14 +9,8 @@ namespace Library
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            //Регистрация бд
-
             var configuration = builder.Configuration;
-
-            builder.Services.AddDbContext<ApplicationContext>(options =>
-            {
-                options.UseNpgsql(configuration.GetConnectionString("ApplicationContext"));
-            });
+            builder.Services.AddDbContext<ApplicationContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

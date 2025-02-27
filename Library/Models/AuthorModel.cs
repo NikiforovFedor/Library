@@ -13,6 +13,6 @@ namespace Library.Models
         [RegularExpression(@"^[А-ЯЁ]\. [А-ЯЁ]\. [А-ЯЁа-яё\s-]+$", ErrorMessage = "Некорректное данные")]
         public string Name { get; set; }
         public int Id { get; set; }
-        public List<BookModel> Books { get; set; }
+        public virtual List<BookModel> Books { get; set; }
     }
 }
